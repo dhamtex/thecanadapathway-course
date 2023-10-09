@@ -1,0 +1,37 @@
+/*
+ * Copyright 2021 TR Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+.TypingLogReplayPlayer .lblSectionHeading {font-weight: bold; text-decoration: underline;}
+.TypingLogReplayPlayer .lblStatusIndicator {font-weight: bold;}
+.TypingLogReplayPlayer .statusIndicator {font-style: italic; margin: 0 5px;}
+.TypingLogReplayPlayer .AnimationSpeedSelector {cursor: pointer;}
+.TypingLogReplayPlayer .TypingDisplaySection {border: 1px solid darkgray; border-radius: 4px;}
+.TypingLogReplayPlayer .TextDisplay {cursor: text; font-family: monospace; font-size: 125%;}
+.TypingLogReplayPlayer .TypingEditDisplay {font-family: monospace; font-size: 125%;}
+/* add a border-right style to the acceptedChars span to show a cursor of where the replay is in the overall text */
+.TypingLogReplayPlayer .TextDisplay .acceptedChars {border-right: 1px blue solid; color: #99cc00}
+.TypingLogReplayPlayer .TypingEditDisplay .errChar-ins {border-left: 1px red solid;}
+.TypingLogReplayPlayer .TypingEditDisplay .errChar-del {background-color: #f0a3a3;}
+.TypingLogReplayPlayer .TypingEditDisplay .errChar-sub {background-color: #f0a3a3;}
+.TypingLogReplayPlayer .WordsWithErrors .replayWord {cursor: pointer;}
+.TypingLogReplayPlayer .ImageButton {
+  margin: 0 2px;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+}
+/* TODO: move the .ImageButton styles to Commons.css */
+.ImageButton {cursor:pointer; display:block;}
+.ImageButton:hover {opacity:.5;}

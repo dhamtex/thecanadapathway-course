@@ -1,26 +1,102 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import withLoginContext from "./hoc/withLoginContext";
+import Footer from "./components/Footer";
 
 function App() {
+  const [accessCode, setAccessCode] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    axios
+      .post("http://localhost:8085/login", {
+        accessCode,
+      })
+      .then((response) => {
+        localStorage.setItem("accessToken", response?.data?.accessToken);
+        localStorage.setItem("user", JSON.stringify(response?.data?.user));
+        localStorage.setItem("date", new Date().getTime().toString());
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div style={{ background: "black", color: "white", padding: "1rem" }}>
+        <h2 style={{ margin: "0" }}>Thecanadapathway.com</h2>
+      </div>
+      <div
+        style={{
+          background: "rgb(204,204,204,.5)",
+          height: "91vh",
+          display: "flex",
+        }}
+      >
+        <div
+          style={{
+            background: "white",
+            height: "fit-content",
+            padding: "3.5rem 1rem 7rem 1.5rem",
+            width: "70%",
+            margin: "auto",
+            borderTop: "3px solid orange",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <form
+            style={{ textAlign: "center" }}
+            onSubmit={(event) => handleSubmit(event)}
+          >
+            <span style={{ fontWeight: "bold", display: "block" }}>
+              Login using your Access Code
+            </span>
+            <span
+              style={{ fontWeight: "bold", display: "block", color: "red" }}
+            >
+              Use your Access Code to Login
+            </span>
+            <input
+              type="password"
+              required
+              value={accessCode}
+              onChange={(event) => setAccessCode(event.target.value)}
+            />
+            <button
+              style={{
+                display: "block",
+                margin: "auto",
+                background: "#b60000",
+                color: "white",
+                padding: "1rem 1.5rem",
+                outline: "none",
+                border: "none",
+                cursor: "pointer",
+              }}
+              className="accessCourse"
+            >
+              Access Course
+            </button>
+            <span
+              style={{
+                display: "block",
+                marginTop: "1rem",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              Register a new membership
+            </span>
+          </form>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }
 
-export default App;
+export default withLoginContext(App);
